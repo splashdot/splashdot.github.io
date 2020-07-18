@@ -13,6 +13,7 @@ edbb25dfdfe594eb597484e31968fafa0462e81b203497aff0f5a60879860e53
 [Virus Total](https://www.virustotal.com/gui/file/edbb25dfdfe594eb597484e31968fafa0462e81b203497aff0f5a60879860e53/detection)
 
 This is the output of `olevba.py -a loki.xlsx`:
+
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/images/loki_olevba1.PNG)
 
 It found some OLE streams. Inflating the file with `7z x loki.xlsx` does in fact show a VBA directory with a very big file (ThhfLkbook):
@@ -41,7 +42,7 @@ The functions takes each element of a reversed/backwards string, calculates its 
 
 I wrote a simple python script that does exactly this and gave it the encoded URL:
 
-[! alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/images/loki_python_deobf.PNG)
+[!alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/images/loki_python_deobf.PNG)
 
 So I was able to find the malicious domain:
 
