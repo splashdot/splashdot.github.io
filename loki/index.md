@@ -52,16 +52,18 @@ hxxps://nilemixitupd.biz[.]pl/DFGzsfgs/tuesday.exe
 
 A simple `grep http` on the macro code, which is a very simple step I typically take when assessing a file, would not detect anything unusual: so, although tools like mraptor and olevba were succesfully able to determine that the Excel file was malicious based on the plaint-text functions URLDownloadToFileA and ShellExecuteA, at a first glance it would appear that no URLs are found in the code. This is why I would also add a signature that detects these obfuscated URLs using Regular Expressions:
 
-`fyf\/(.*)00;tquuic`
+`fyf\/(.*)00;tquuic`  
+
 or
-`^(.*)[^00;tquui]`
+
+`^(.*)[^00;tquui]`  
 
 Of course this only works for this kind of "algorithm" that subtracts 1, but if it's consistent in the spam campaign it may be able to alert on further malicious attachments.
 
 ## IOCs
 
-MD5: b1258a49ab3ff21f9c8587cf2a8d17ec
-SHA-256: edbb25dfdfe594eb597484e31968fafa0462e81b203497aff0f5a60879860e53
-Domain: nilemixitupd.biz[.]pl
-URL: hxxps://nilemixitupd.biz[.]pl/DFGzsfgs/tuesday.exe
+MD5: b1258a49ab3ff21f9c8587cf2a8d17ec  
+SHA-256: edbb25dfdfe594eb597484e31968fafa0462e81b203497aff0f5a60879860e53  
+Domain: nilemixitupd.biz[.]pl  
+URL: hxxps://nilemixitupd.biz[.]pl/DFGzsfgs/tuesday.exe  
 IP: 185.189.112[.]191
