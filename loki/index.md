@@ -52,7 +52,7 @@ hxxps://nilemixitupd.biz[.]pl/DFGzsfgs/tuesday.exe
 
 A simple `grep http` on the macro code, which is a very simple step I typically take when assessing a file, would not detect anything unusual: so, although tools like mraptor and olevba were succesfully able to determine that the Excel file was malicious based on the plaint-text functions URLDownloadToFileA and ShellExecuteA, at a first glance it would appear that no URLs are found in the code. This is why I would also add a signature that detects these obfuscated URLs using Regular Expressions:
 
-`fyf\/(.*)00;tquuic`<br>
+`fyf\/(.*)00;tquui`<br>
 
 or <br>
 
