@@ -11,18 +11,18 @@ edbb25dfdfe594eb597484e31968fafa0462e81b203497aff0f5a60879860e53
 [Virus Total](https://www.virustotal.com/gui/file/edbb25dfdfe594eb597484e31968fafa0462e81b203497aff0f5a60879860e53/detection)
 
 This is the output of `olevba.py -a loki.xlsx`:
-(loki_olevba)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/images/loki_olevba1.PNG)
 
 It found some OLE streams. Inflating the file with `7z x loki.xlsx` does in fact show a VBA directory with a very big file (ThhfLkbook):
 
-(loki_tree)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/images/loki_functions.PNG)
 
 To dump the contents I used oledump.py, and found a rather obfuscated VB script:
 
 (loki_wc)
 
 The script has some blobs of useless code, which I determined by ensuring that the functions declared were not referenced anywhere else.
-Once I removed them, I was left with a still long code, and the two parts that draw my attention were of course ShellExecuteA and URLDowloadToFileA, which were also piced up by olevba:
+Once I removed them, I was left with a still long code, and the two parts that draw my attention were of course ShellExecuteA and URLDownloadToFileA, which were also piced up by olevba:
 
 (loki_funtions)
 
