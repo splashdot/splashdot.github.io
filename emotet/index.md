@@ -1,5 +1,4 @@
-# New Emotet spam campaign (July, 2020)
-# Analysis of the malicious macro
+# New Emotet spam campaign (July, 2020) - Analysis of the VBA macro
 
 ## Intro
 
