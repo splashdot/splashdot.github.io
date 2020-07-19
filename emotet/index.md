@@ -18,20 +18,20 @@ VT Score: 20/62
 
 Running `olevba.py` and `oledump.py` shows some results, as the document does in fact contain macros:
 
-(oledump_1)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/oledump_1.PNG)
 
 `joiwweiquvair` is very simple:
 
-(oledump_2)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/oledump_2.PNG)
 
 So the objective becomes now to understand `yuamcuatpaztheubchuthpiv`, wich is contained in `kuujdout`. I've dumped it and opened it on a text editor for a better view.
 The code is around 270 lines and is heavily obfuscated, here some lines that are put there to disturb analysis and automatic detection:
 
-(sublime_1)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/sublime_1.PNG)
 
 Once removed we end up with still a very hardly readable code, given that variables and functions are referenced many times around the code as a mean of confusion:
 
-(sublime_2)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/sublime_2.PNG)
 
 Of particular importance is the string `vaodboorqueodquuuthcav`, which translates into `winmgmts:win32_process`.
 However, following the code does not reveal much about network indicators, as it apears that the majority of it is meant to create a very real-looking prompt to enable macros.
@@ -39,20 +39,20 @@ However, following the code does not reveal much about network indicators, as it
 In order to find the other part of the code we need to poke into the other "unusual" directory in the .doc file (`zouzluumthoempooh`), invoked by `conzuugdeerboocchath()`.
 This is the output of `tree` run against the directory /Macro:
 
-(tree_1)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/tree_1.PNG)
 
 The file we are going to be interested in is `Macros/zouzluumthoempooh/i09/o`:
 
-(xxd_1)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/xxd_1.PNG)
 
 It's a block of data that contains a string that can be decoded like the previous ones. I dumped it and sure enough it is a base64 encoded Powershell command:
 
-(base64_d)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/base64_d.PNG)
 
 Once decoded is once again an obfuscated Powershell script.
 Here it is a little prettified (I have removed some useless variables and formatted it):
 
-(final_1)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/final_1.PNG)
 
 And finally I was able to find the domains serving the Emotet executable:
 
@@ -68,7 +68,8 @@ As others have already noted the macro has some possible indicators of compromis
 
 What is intriguing is that CLI tools were a little unsure of the documents behaviour. For instance, mraptor does not detect files being written to disk:
 
-(mraptor_1)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/emotet/images/mraptor_1.PNG)
+
 VirusTotal scores also seem to vary greatly: so it seems that the authors did a very good job at obfuscating the code intentions.
 
 Domains extraction could be automated, supposing that all of the documents have the same structure. That I will have to look into once I have accumulated a more reasonable amount of samples.
