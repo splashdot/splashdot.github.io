@@ -8,7 +8,7 @@ I have downloaded a few samples and tried extracting network indicators as an ex
 
 ## Samples
 
-I have downloaded some documents from [Malware Bazaar](https://bazaar.abuse.ch/browse/) with tag Emotet, all of which were uploaded on the 17th. All of them presented the same behaviour, so I'll chose a random one to show the code of.
+I have downloaded some documents from [Malware Bazaar](https://bazaar.abuse.ch/browse/) with tag Emotet, all of which were uploaded on the 17th. All of them presented the same behaviour, so I'll choose a random one to show the code of.
 
 MD5: 10127152f4dc273b931eb4c65c7e9814 <br>
 VT Score: 20/62 <br>
