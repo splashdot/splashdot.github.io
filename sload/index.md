@@ -180,10 +180,10 @@ hxxps://ponmer[.]eu/topic/
 
 ## Blue Team considerations
 
-Hash based detections will likely fail with this malware, given the presence of several randomnly named garbage variables. Perhaps fuzzy hashes like SSDeep may pick up on the malware.
+Hash based detections will likely fail with this malware, given the presence of several randomnly named garbage variables. Perhaps fuzzy hashes like SSDeep may pick up on it.
 
-Also string based detection is likely going to fail, as the obfuscation is so big that almost no intelligible word is visible on the code.
+Also string based detection is likely going to fail, as the obfuscation is so deep that almost no intelligible word is visible on the code.
 
-I believe that an effective countermeasure would be to monitor programs hashes and their startup path, in other words I would not expect to see powershell.exe start from %appdata% with a different, random name, but that is rather difficul to monitor. Another possible way of automatically deteting this malware would be to register beaconing activty to the C2 (every three minutes), or to already have the malicious domains on blocklist.
+I believe that an effective countermeasure would be to monitor known/legitimate programs hashes and their startup path, in other words I would not expect to see powershell.exe start from %appdata% with a different, random name, but that is rather difficul to monitor. Another possible way of automatically deteting this malware would be to register beaconing activty to the C2 (every three minutes), or to already have the malicious domains on blocklist.
 
 
