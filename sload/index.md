@@ -2,9 +2,13 @@
 
 ## Introduction
 
-Following is an in-deth analysis of the initial obfuscated Powershell script used by sLoad.
+Following is an in-depth analysis of the initial obfuscated Powershell script used by sLoad to drop its content.
 
-The sample I have been investigating was executed by a copy of `powershell.exe`, which took a .gif file as parameter: this .gif is a Powershell script with that extension. The powershell.exe copy was named with random letters, and it was saved in `\appdata\roaming`, just like the .gif file. The technique of renaming legitimate Windows executable was used again throughout the code.
+The sample I have been investigating was executed by a copy of `powershell.exe`, which took a .gif file as parameter: this .gif is a Powershell script with that extension, there is no header in the file, just text:
+
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/hex_1.PNG)
+
+The powershell.exe copy was named with random letters, and it was saved in `\appdata\roaming`, just like the .gif file. The technique of renaming legitimate Windows executable was used again throughout the code.
 
 Notably the .gif file, which I will be calling "malicious.gif", currently has a score of 1/59 on Virustotal and was first uploaded on the 15th of July, 2020. The domains used to exfiltrate data have a "first seen time" on Virustotal on the first week of July 2020.
 
@@ -43,7 +47,7 @@ $dedizMDdAnX="*@/@*(c#! !@((c*)*o#*(p*@(y(( *!*^/*@^#Z**( *c@!#:^#*\*(*W(#(*i!*n
 
 ```
 
-In this instance, only certain special characters are replaced. The two variables are parameters, then passed to `cmd`, that copy the legitimate executables of bitsadmin and wscript to the directory where the malware installs itself into, and rename them with hardcoded strings. The same happened with powershell.exe when it was used to execute malicious.gih.
+In this instance, only certain special characters are replaced. The two variables are parameters, then passed to `cmd`, that copy the legitimate executables of bitsadmin and wscript to the directory where the malware installs itself into, and rename them with hardcoded strings. The same happened with powershell.exe when it was used to execute malicious.gif.
 
 Here they are unobfuscated (notice how they are then used with `cmd`):
 
@@ -119,7 +123,9 @@ This is the deobfuscated version:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/sublime_10.PNG) 
 
-*system.ini* is converted to a secure string and then is read using the Marshal class. Its content is executed with iex (Invoke-Expression).
+*system.ini* is converted to a secure string and then is read using the Marshal class. Its content is executed with iex (Invoke-Expression). This is a hex view of the file:
+
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/hex_2.PNG) 
 
 Finally, the last three lines of code create the scheduled task and execute it, then killing powershell (nice touch).
 
@@ -167,7 +173,7 @@ This is what gets sent, notice that the versions variables appear:
 
 There seems to be still Star Wars reference, given the variables `Yoda`, `Maul`, `clone` and `droids` used in the code.
 
-The data is exfiltrated using bitsadmin and the C2 are hardcoded in win.ini:
+The data is exfiltrated using bitsadmin and the C2 are hardcoded in *win.ini*:
 
 hxxps://lwyhef[.]eu/topic/ <br>
 hxxps://ponmer[.]eu/topic/
