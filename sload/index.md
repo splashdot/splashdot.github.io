@@ -1,12 +1,14 @@
-# Static code analysis of sLoad (ver="2.9.3")
+# Static code analysis of sLoad ($ver="2.9.3")
 
 ## Introduction
 
-The sample I have been investigating was executed by a copy of `powershell.exe` , which took a .gif file as parameter. The powershell.exe copy was named with random letters, and it was saved in `\appdata\roaming`, just like the .gif file. The technique of renaming legitimate Windows executable was used again throughout the code.
+Following is an in-deth analysis of the initial obfuscated Powershell script used by sLoad.
+
+The sample I have been investigating was executed by a copy of `powershell.exe`, which took a .gif file as parameter: this .gif is a Powershell script with that extension. The powershell.exe copy was named with random letters, and it was saved in `\appdata\roaming`, just like the .gif file. The technique of renaming legitimate Windows executable was used again throughout the code.
 
 Notably the .gif file, which I will be calling "malicious.gif", currently has a score of 1/59 on Virustotal and was first uploaded on the 15th of July, 2020. The domains used to exfiltrate data have a "first seen time" on Virustotal on the first week of July 2020.
 
-Of course, in typical sLoad fashion, the beginning Powershell script is heavily obfuscated and contains close to none suspicious keywords, as it employs many different code obusfaction techniques.
+Of course, in typical sLoad fashion, the beginning Powershell script is heavily obfuscated and contains close to none suspicious keywords, as it employs many different code obfuscation techniques.
 
 ## First steps: malicious.gif
 
@@ -31,7 +33,7 @@ Another obfuscation/filter evasion technique is the following, which is used man
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/sublime_2.PNG)
 
-All numbers are deleted (replaced with nothing), so the string becomes "\AppData\Roaming\". Searching for "replace" on the code shows 7 matches, but I believe the most intersting ones are these, which are found in the first part of the code:
+All numbers in the content of a variable are deleted (replaced with nothing), so in this case the string in $t becomes "\AppData\Roaming\". Searching for "-replace" on the code shows 7 matches, but I believe the most intersting ones are these, which are found in the first part of the code:
 
 ```sh
 
@@ -41,7 +43,9 @@ $dedizMDdAnX="*@/@*(c#! !@((c*)*o#*(p*@(y(( *!*^/*@^#Z**( *c@!#:^#*\*(*W(#(*i!*n
 
 ```
 
-They are used to obfuscate the real commands, which are copying bitsadmin and wscript to randomly named executables, same as with powershell. Here they are unobfuscated (notice how they are then invoked with `cmd`):
+In this instance, only certain special characters are replaced. The two variables are parameters, then passed to `cmd`, that copy the legitimate executables of bitsadmin and wscript to the directory where the malware installs itself into, and rename them with hardcoded strings. The same happened with powershell.exe when it was used to execute malicious.gih.
+
+Here they are unobfuscated (notice how they are then used with `cmd`):
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/sublime_3.PNG)
 
@@ -51,11 +55,10 @@ The code also creates some random variables which will be used to name the direc
 
 Other initial variables the code creates are the following:
 
-```java
+```javascript
 $hh='hi'+'dd'+'en';
 $ldkrIR="";
-$xjTmvrFuKEDUWZ = "`r`n"
-
+$xjTmvrFuKEDUWZ = "`r`n";
 ```
 
 The first one is "hidden", the second one is just empty and the third one is new line. They will be used throughout the code to avoid detection.
@@ -75,11 +78,11 @@ Following are the codes, which I redacted for brevity:
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/sublime_6.PNG)
 
 They gets written to the temp folder created in the first part of the code.
-Nothing of interest is found at this time on these two files, which are used only later. They contain all the code needed for the exfiltration, in particular win.ini contains the C2 domains.
+Nothing of interest is found at this time on these two files, which are used only later. They contain all the code needed for the exfiltration, in particular *win.ini* contains the C2 domains.
 
 ### 4 - gaining persistence
 
-The last part of the code is again very interesting from a deobfuscation point of view, as it employes many different techniques. Two big portions of the code are aimed at creating a .txt file and a .ps1 file, which are used by the payload. They use the same technique in part 2 and 3, albeit with some minor changes:
+The last part of the code is again very interesting from a deobfuscation point of view, as it employes many different techniques, even regular expressions. Two big portions of the code are aimed at creating a .txt file and a .ps1 file, which are used by the payload. They use the same technique in part 2 and 3, albeit with some minor changes:
 
 This is part of the code that writes the .txt file:
 
@@ -87,7 +90,7 @@ This is part of the code that writes the .txt file:
 
 It appends the strings to a variable, but the strings are plaintext. Also, it uses `$xjTmvrFuKEDUWZ` and `$ldkrIR` which are the new line and the empty char respectively, mentioned in part 1.
 
-Once unobfuscated the code that creates the .txt string is very interesting: it uses two functions which are there exclusively to decode the text of the code itself using RegExp! Here it is:
+Once reconstructed, the code that creates the .txt string is still obfuscated and very interesting: it uses two functions which are there exclusively to decode the text of the code itself using RegExp! Here it is:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/sublime_8.PNG)
 
@@ -97,8 +100,8 @@ I'll manually add the last line of code, as it deserves a particular analysis:
 avgUs.run gEGaGH("p62o46w38e46r77s29h7e19l18l72 56-53e8p78 60b74y93p12a87s83s86 56-79f67i19l76e70") & " '+$SDLUpTpGMpqcF+'" & FDQiHDTMtjIfuIuENJTb(".233p87s25153"),0,true
 ```
 
-So the WScript object parameters are obtained by using `gEGaGH`, which substitutes every number with nothing, and `FDQiHDTMtjIfuIuENJTb`, which substitues every number but `1` with nothing: this is because otherwise the powershell extension `.ps1` would not be correctly written. I like to imagine how this must have caused some errors during the coding of the malware, which resulted in the need to create two distinct functions!
-So avgUs becomes this:
+The WScript object parameters are obtained by using `gEGaGH`, which substitutes every number with nothing, and `FDQiHDTMtjIfuIuENJTb`, which substitues every number but `1` with nothing: this is because otherwise the powershell extension `.ps1` would not be correctly written. I like to imagine how this must have likely caused some errors during the coding of the malware, which resulted in the need to implement two distinct functions!
+Finally avgUs becomes this:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/sublime_9.PNG)
 
@@ -108,13 +111,15 @@ The .ps1 file is possibly even more interesting, although rather straightforward
 
 Note: `$Vh` is an array of 18 random Cmdlets.
 
-This is the obfuscated code:
+This is the obfuscated code, with the usual trick of appending strings:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/sublime_11.PNG)
 
 This is the deobfuscated version:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sload/images/sublime_10.PNG) 
+
+*system.ini* is converted to a secure string and then is read using the Marshal class. Its content is executed with iex (Invoke-Expression).
 
 Finally, the last three lines of code create the scheduled task and execute it, then killing powershell (nice touch).
 
@@ -134,6 +139,8 @@ start-process -windowstyle $hh cmd $hWUHsjdaCKUaSaQwQ;
 `$mRiDMVGkRsmxDiCggXsF` -> current randomly named directory <br>
 `CRiwTpyD.exe` -> wscript <br>
 `$SDLUpTpGMpqcF` -> .txt file that runs the .ps1 script, that runs *system.ini* <br>
+
+An example of the task content is in the nex chapter.
 
 ## Artifacts on an infected machine
 
@@ -164,6 +171,5 @@ The data is exfiltrated using bitsadmin and the C2 are hardcoded in win.ini:
 
 hxxps://lwyhef[.]eu/topic/ <br>
 hxxps://ponmer[.]eu/topic/
-
 
 
