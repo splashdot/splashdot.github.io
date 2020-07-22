@@ -133,8 +133,8 @@ This is the line where the scheduled task is created, and we are now able to und
 
 ```sh
 $hWUHsjdaCKUaSaQwQ='/C schtasks /F /%windir:~0,1%reate /sc minute /mo 3 /TN "S'+$rs+$ezAdXVUDiUiZdERVV+'" /ST 07:00 /TR "'+$mRiDMVGkRsmxDiCggXsF+'\CRiwTpyD.exe /E:vbscript '+$mRiDMVGkRsmxDiCggXsF+'\'+$SDLUpTpGMpqcF+'.txt"';
-
 start-process -windowstyle $hh cmd $hWUHsjdaCKUaSaQwQ;
+stop-process -name powershel*
 ```
 
 
@@ -161,7 +161,7 @@ This is the scheduled task:
 ## The payload
 
 As my aim was primarily focused on the obfuscation technique employed by the actor, I will not go into the details of how the malware operates.
-The content of *system.ini* is still somewhat obfuscated, and exfiltrates all kinds of information from the computer.
+The content of *system.ini* is still somewhat obfuscated, and exfiltrates all kinds of information from the computer. It must be noted that *system.ini* currently has a detection of 0/60 on Virustotal.
 
 The first lines contain the versions of the malware, which get also sent to the C2:
 
@@ -177,5 +177,13 @@ The data is exfiltrated using bitsadmin and the C2 are hardcoded in *win.ini*:
 
 hxxps://lwyhef[.]eu/topic/ <br>
 hxxps://ponmer[.]eu/topic/
+
+## Blue Team considerations
+
+Hash based detections will likely fail with this malware, given the presence of several randomnly named garbage variables. Perhaps fuzzy hashes like SSDeep may pick up on the malware.
+
+Also string based detection is likely going to fail, as the obfuscation is so big that almost no intelligible word is visible on the code.
+
+I believe that an effective countermeasure would be to monitor programs hashes and their startup path, in other words I would not expect to see powershell.exe start from %appdata% with a different, random name, but that is rather difficul to monitor. Another possible way of automatically deteting this malware would be to register beaconing activty to the C2 (every three minutes), or to already have the malicious domains on blocklist.
 
 
