@@ -76,7 +76,6 @@ Finally, the configuration is fully obtained by beautifying the json:
 A thorough explanation of the fields can be found online [(1)](https://blog.intel471.com/2020/03/31/revil-ransomware-as-a-service-an-analysis-of-a-ransomware-affiliate-operation/),[(2)](https://www.secureworks.com/research/revil-sodinokibi-ransomware), some interesting ones are first three:
 
 | `pk`  | attacker's public key |
-|-------|-----------------------|
 | `pid` | affiliate ID          |
 | `sub` | campaign identifier   |
 
