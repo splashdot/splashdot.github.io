@@ -100,3 +100,5 @@ Sodinokibi will create a mutex using `CreateMutexA`, here is a screenshot of its
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sodinokibi/images/mutex_1.PNG)
 
 The ransomware will also attempt to send details of the machine to the list of hardcoded C2 servers in the config (`dmn`). It will send the contents of the values saved in a key in the registry, so DNS requests to those domains are to be expected on the network.
+
+Other valuable information regarding every stage of the infection can be found [here](https://www.tgsoft.it/immagini/news/20190705Sodinokibi/Sodinokibi_eng.pdf).
