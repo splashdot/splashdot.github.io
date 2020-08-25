@@ -34,7 +34,7 @@ When I hit the breakpoint on the return of the `VirtualAlloc` I right-click the 
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sodinokibi/images/virtual_alloc_3.PNG)
 
-At the next run I will hit the call to `VirtualProtect`, and the section will have our upacked PE:
+At the next run I will hit the call to `VirtualProtect`, and the dump will have our upacked PE:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sodinokibi/images/unpacked_1.PNG)
 
@@ -73,7 +73,7 @@ Finally, the configuration is fully obtained by beautifying the json:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/sodinokibi/images/config_3.PNG)
 
-A thorough explanation of the fields can be found online[(1)](https://blog.intel471.com/2020/03/31/revil-ransomware-as-a-service-an-analysis-of-a-ransomware-affiliate-operation/),[(2)](https://www.secureworks.com/research/revil-sodinokibi-ransomware), some interesting ones are first three:
+A thorough explanation of the fields can be found online [(1)](https://blog.intel471.com/2020/03/31/revil-ransomware-as-a-service-an-analysis-of-a-ransomware-affiliate-operation/),[(2)](https://www.secureworks.com/research/revil-sodinokibi-ransomware), some interesting ones are first three:
 
 | `pk`  | attacker's public key |
 |-------|-----------------------|
