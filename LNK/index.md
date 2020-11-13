@@ -4,9 +4,9 @@
 
 There has been some talk about Windows Shell Link files (LNK files, or shortcuts) remote command execution thanks to the recent, albeit patched, CVE-2020-0729, but the file format's vulnerabilities date back many years (see CVE-2017-8464 and CVE-2015-0096 for recent examples, ore even CVE-2010-2568 which was used in Stuxnet). Although command execution vulnerabilities are being patched (or dismissed as ["social engineering"](https://devblogs.microsoft.com/oldnewthing/20190403-00/?p=102381), the file's structure is still prone to exploitability.
 
-Of note, Windows makes a heavy use of Shell Link files for a number of operations. For instance, whenever a file is opened a Shell Link is created in %appdata% (under \Roaming\Microsoft\Windows\Recent items) and remains there after the file deletion or even secure deletion: in combination with the the trove of information these files carry, this makes them invaluable for forensic investigation.
+Of note, Windows makes a heavy use of Shell Link files for a number of operations. For instance, whenever a file is opened a Shell Link is created in %appdata% (under \Roaming\Microsoft\Windows\Recent items) and remains there after the file deletion or even secure deletion: in combination with the trove of information these files carry, this makes them invaluable for forensic investigation.
 
-In this article I would like to show how the path to the Icon in a LNK file can be abused to download arbitrary and undetected content from the Internet, and briefly discuss about possible scenarios where this behaviour might result in attacks being carried out. I will also point out that forensic tools such as exiftool will not detect/display the malicious URLs contained in files that have been modified.
+In this article I would like to show how the path to the Icon in a LNK file can be abused to download arbitrary and undetected content from the Internet, and briefly discuss about possible scenarios where this behaviour might result in attacks being carried out. I will also point out that forensic tools such as exiftool will not detect/display the malicious URLs contained in shortcus that have been modified.
 
 ## The Shell Link file format
 
@@ -49,13 +49,17 @@ The UA-CPU made me curious, and I found out that it is a [legacy header](https:/
 
 ## Inconspicuous LNK file
 
-Now, what about real/working LNK files? I created a file that points to a folder (\Documents), and that by itself does not set the HasIconLocation flag as it uses the same icon of the linked file (this is the default behaviour). In order to set the flag, other than directly modifying the file in a hex editor, I simply changed its icon to a red X by going into Properties>Change icon. Now looking at it in a hex editor we see that the Icon bit is set and that the icon location is C:\Windows\system32\imageres.dll.
+Now, what about real/working LNK files? I created a file that points to a folder (\Documents), and that by itself does not set the HasIconLocation flag as it uses the same icon of the linked file (this is the default behaviour). In order to set the flag, other than directly modifying the file in a hex editor, I simply changed its icon to a red X by going into Properties>Change icon.
+
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/prop1.PNG)
+
+Looking at it in a hex editor we see that the Icon bit is set and that the icon location is C:\Windows\system32\imageres.dll.
 
 Now all that is left to do is changing the icon location: what I have discovered is that changing the `IconEnvironmentDataBlock` in the EXTRA_DATA structure does not alter the file's functionality, as it still opens the \Documents folder and does not change the displayed Icon, but it also makes an HTTP request and downloads the PowerSploit script.
 
 This is the structure (in the EXTRA_DATA structure):
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/structure2.PNG)
+![alt text] 
 
 And in fact here is the path:
 
@@ -74,11 +78,14 @@ On the initial illustrative LNK file selecting "change icon" from the properties
 On the newly created file it does not. Also, this is the output of exiftool against the two LNKs:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/exif1.PNG)
+_(exfitool's output of the shortcut I created as an example)_
+
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/exif2.PNG)
+_(exiftool's output) of the working shortcut that has been modified to download the PowerSploit module_
 
 Note that the malicious URL does not appear anywhere in the properties menu. In short, nothing seems odd, and the file is usable, but it will perform a connection to a remote IP.
 
-Also note the different amount of information between the two files: on the one we created to illustrate the vulnerability almost nothing is present, included the malicious URL, and the only flag is the icon one. On the other many more details are contained, but still no indication of the URL.
+Also note the different amount of information between the two files: on the one we created to illustrate the vulnerability (second picture) almost nothing is present, included the malicious URL, and the only flag is the icon one. On the other (first picture) many more details are contained, but still no indication of the URL.
 
 ## Exploitability
 
