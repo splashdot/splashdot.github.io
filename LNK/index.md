@@ -29,21 +29,21 @@ These are the only thing I added to the empty file:
 2. HasIconLocation flag (6th bit of the Link Flags structure in the header)
 3. The path to the icon (in this case to a webserver, after the 76 bytes header)
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/simple1.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/simple1.PNG)
 
 The interesting part is that the icon will be loaded every time the file is displyed in a folder, that is, every time a user goes to a folder containing the malicious LNK file we will see a GET request:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/get1.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/get1.PNG)
 
 But what is even more interesting is that this file will actually be downloaded, and can be found in \AppData\Local\Microsoft\Windows\INetCache:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/ps1.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/ps1.PNG)
 
 Now, what is definitively more interesting is that this file is not being checked by Windows Defender when downloaded: as a matter of fact the file.ico in my example is actually a PowerSploit module. Of course once executed/loaded into memory the AV will be able to pick it up (supposed that is it not obfuscated that is).
 
 Interesting sidenote: this is the header of the HTTP request from a Wireshark capture:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/.ua1.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/.ua1.PNG)
 
 The UA-CPU made me curious, and I found out that it is a [legacy header](https://www.oreilly.com/library/view/http-the-definitive/1565925092/re52.html) that is used by WinJS.xhr() (a wrapper for XMLHttpRequest) which is probably used by the API making the HTTP request (more info: https://social.msdn.microsoft.com/Forums/en-US/acb61377-d64c-4c29-89df-4cd7938c6ad4/how-to-prevent-winjsxhr-adding-a-quotuacpuquot-http-header-to-every-request).
 
@@ -55,11 +55,11 @@ Now all that is left to do is changing the icon location: what I have discovered
 
 This is the structure (in the EXTRA_DATA structure):
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/structure2.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/structure2.PNG)
 
 And in fact here is the path:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/structure3.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/structure3.PNG)
 
 It is sufficient to change this and substitute it with the URL. Note that the LNK still has the full path of the icon, and that is why it will still display the icon we chose.
 
@@ -67,14 +67,14 @@ It is sufficient to change this and substitute it with the URL. Note that the LN
 
 On the initial illustrative LNK file selecting "change icon" from the properties menu shows this rather suspicious error:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/err1.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/err1.PNG)
 
 (translation: "File http://192.168.56.103/icon.ico not found")
 
 On the newly created file it does not. Also, this is the output of exiftool against the two LNKs:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/exif1.png)
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/exif2.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/exif1.PNG)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/exif2.PNG)
 
 Note that the malicious URL does not appear anywhere in the properties menu. In short, nothing seems odd, and the file is usable, but it will perform a connection to a remote IP.
 
@@ -106,4 +106,4 @@ Finally I find it fascinating that this weakness requires almost no interaction 
 
 Chapter 4 of the Windows Shell Link file structure is titled "Security" and seems to subtly acknowledge that the file does in fact contain security issues:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/final1.png)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/final1.PNG)
