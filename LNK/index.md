@@ -78,7 +78,7 @@ On the initial illustrative LNK file selecting "change icon" from the properties
 On the newly created file it does not. Also, this is the output of exiftool against the two LNKs:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/exif1.PNG)
-_(exiftool's output) of the working shortcut that has been modified to download the PowerSploit module_
+_(exiftool's output of the working shortcut that has been modified to download the PowerSploit module)_
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/exif2.PNG)
 _(exfitool's output of the shortcut I created as an example)_
