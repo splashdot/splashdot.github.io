@@ -43,7 +43,7 @@ Now, what is definitively more interesting is that this file is not being checke
 
 Interesting sidenote: this is the header of the HTTP request from a Wireshark capture:
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/.ua1.PNG)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/ua1.PNG)
 
 The UA-CPU made me curious, and I found out that it is a [legacy header](https://www.oreilly.com/library/view/http-the-definitive/1565925092/re52.html) that is used by WinJS.xhr() (a wrapper for XMLHttpRequest) which is probably used by the API making the HTTP request (more info: https://social.msdn.microsoft.com/Forums/en-US/acb61377-d64c-4c29-89df-4cd7938c6ad4/how-to-prevent-winjsxhr-adding-a-quotuacpuquot-http-header-to-every-request).
 
