@@ -2,7 +2,7 @@
 
 ## Intro
 
-There has been some talk about Windows Shell Link files (LNK files, or shortcuts) remote command execution thanks to the recent, albeit patched, CVE-2020-0729, but the file format's vulnerabilities date back many years (see CVE-2017-8464 and CVE-2015-0096 for recent examples, ore even CVE-2010-2568 which was used in Stuxnet). Although command execution vulnerabilities are being patched (or dismissed as ["social engineering"](https://devblogs.microsoft.com/oldnewthing/20190403-00/?p=102381), the file's structure is still prone to exploitability.
+There has been some talk about Windows Shell Link files (LNK files, or shortcuts) remote command execution thanks to the recent, albeit patched, CVE-2020-0729, but the file format's vulnerabilities date back many years (see CVE-2017-8464 and CVE-2015-0096 for recent examples, ore even CVE-2010-2568 which was used in Stuxnet). Although command execution vulnerabilities are being patched (or dismissed as ["social engineering"](https://devblogs.microsoft.com/oldnewthing/20190403-00/?p=102381)), the file's structure is still prone to exploitability.
 
 Of note, Windows makes a heavy use of Shell Link files for a number of operations. For instance, whenever a file is opened a Shell Link is created in %appdata% (under \Roaming\Microsoft\Windows\Recent items) and remains there after the file deletion or even secure deletion: in combination with the trove of information these files carry, this makes them invaluable for forensic investigation.
 
@@ -72,8 +72,7 @@ It is sufficient to change this and substitute it with the URL. Note that the LN
 On the initial illustrative LNK file selecting "change icon" from the properties menu shows this rather suspicious error:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/err1.PNG)
-
-(translation: "File http://192.168.56.103/icon.ico not found")
+_(translation: "File http://192.168.56.103/icon.ico not found")_
 
 On the newly created file it does not. Also, this is the output of exiftool against the two LNKs:
 
