@@ -59,7 +59,7 @@ Now all that is left to do is changing the icon location: what I have discovered
 
 This is the structure (in the EXTRA_DATA structure):
 
-![alt text] 
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/LNK/images/structure2.PNG)
 
 And in fact here is the path:
 
