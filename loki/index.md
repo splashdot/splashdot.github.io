@@ -1,4 +1,4 @@
-# Finding IOCs in a malicious Excel VBA mcacro
+# Finding IOCs in a malicious Excel VBA macro
 
 ## Analysis
 
