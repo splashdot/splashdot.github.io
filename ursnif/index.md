@@ -65,7 +65,7 @@ But let's figure out how, with the functions `ap7how` and `a3guMK` that are call
 
 ### VBA/a94yD
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif/images/a94yD.PNG)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif/images/a94yd.PNG)
 
 We immediately see three global variables declared at the beginning of the stream: the first one is the obfuscated argument of the `CreateObject()` we saw before, the second is a string that contains the character to delete when the "remove parenthesis" function is called (`aiPnSR()`) and the third one is just a number that will be used in the last stream.<br />
 Then, `ap7how` and `a3guMK` are sent to two different subs (note: `If 17728 / 277 < 217 Then` is just a different way to create a `True` statement).
@@ -75,7 +75,7 @@ Then, `ap7how` and `a3guMK` are sent to two different subs (note: `If 17728 / 27
 
 ### VBA/aMuVl
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif/images/aMuVl.PNG)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif/images/aMuV1.PNG)
 
 This stream contains some operations that are going to be used later, mainly in the second half of the code; the two other interesting functions are `aimbhA()` and `aMHvsL()`.<br />
 `aimbhA()` outputs the variable used with `CreateObject()`, so basically `c:\windows\system32\mshta.exe c:\users\public\ms.html` (we will see how in the stream `a4eq3S`), while `aMHvsL()` is going to copy the contents of filename `c:\users\public\ms.com` into filename `c:\users\public\ms.html` (`ac9wVj` is a reference to `FileCopy`).
@@ -129,7 +129,7 @@ After decoding the text in the "Comments" section with ROT13 we are left with an
 
 ### Decoding function
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif/images/deconding_func.PNG)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif/images/decoding_func.PNG)
 
 In this first part we see `decode(input)`: this function will perform bit operations on the string given as input. Then, it will write the contents of `awChra` (around 18k characters) into a registry key (`"HKEY_CURRENT_USER\\Software\\a7igH2\\awnoB1"`).
 
