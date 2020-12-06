@@ -8,13 +8,13 @@ Given the recent, new campaign aimed at distributing the Ursnif trojan, I though
 
 Uploaded to Malwaare Bazzar by ["@JAMES_MHT"](https://twitter.com/JAMESWT_MHT/) on the 3rd of December:
 
-_File Name:_ scongiurare.12.01.2020.doc
-_MD5:_ 9edc856edd53b45e9c6f84c2e65e1cc7
-_SHA256:_ 4d1c37dac45daec5880750b8499b337e6ccf3696bfd645c4e22f388001e79900
-_MIME type:_ application/vnd.openxmlformats-officedocument.wordprocessingml.document
-_VirusTotal score:_ 32/64 (at the time of writing)
-_Document Author:_ egmu
-_Creation time:_ 02/12/2020 04:05
+_File Name:_ scongiurare.12.01.2020.doc_
+_MD5:_ 9edc856edd53b45e9c6f84c2e65e1cc7_
+_SHA256:_ 4d1c37dac45daec5880750b8499b337e6ccf3696bfd645c4e22f388001e79900_
+_MIME type:_ application/vnd.openxmlformats-officedocument.wordprocessingml.document_
+_VirusTotal score:_ 32/64 (at the time of writing)_
+_Document Author:_ egmu_
+_Creation time:_ 02/12/2020 04:05_
 
 ## Overview
 
