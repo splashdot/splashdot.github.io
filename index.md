@@ -16,9 +16,9 @@ This is my Twitter: ["@elioxyz"](https://twitter.com/elioxyz)
 
 This is a list of articles and writeup I have uploaded so far:
 
--Finding IOCs in a malicious Excel VBA mcacro: ["Loki"](https://splashdot.github.io/loki/), _17/07/2020_
--New Emotet spam campaign (July, 2020): ["emotet"](https://splashdot.github.io/emotet/), _19/07/2020_
--Static code analysis of sLoad ($ver=”2.9.3”): ["sload"](https://splashdot.github.io/sload/), _22/07/2020_
--Extraction of the Sodinokibi configuration file: ["sodinokibi"](https://splashdot.github.io/sodinokibi/), _26/08/2020_
--Shell Link files 0-interaction exploitability: ["LNK"](https://splashdot.github.io/LNK/), _13/11/2020_
--Ursnif Word macro deobfuscation: ["ursnif"](https://splashdot.github.io/ursnif/), _06/12/2020_
+- Finding IOCs in a malicious Excel VBA mcacro: ["Loki"](https://splashdot.github.io/loki/), _17/07/2020_
+- New Emotet spam campaign (July, 2020): ["emotet"](https://splashdot.github.io/emotet/), _19/07/2020_
+- Static code analysis of sLoad ($ver=”2.9.3”): ["sload"](https://splashdot.github.io/sload/), _22/07/2020_
+- Extraction of the Sodinokibi configuration file: ["sodinokibi"](https://splashdot.github.io/sodinokibi/), _26/08/2020_
+- Shell Link files 0-interaction exploitability: ["LNK"](https://splashdot.github.io/LNK/), _13/11/2020_
+- Ursnif Word macro deobfuscation: ["ursnif"](https://splashdot.github.io/ursnif/), _06/12/2020_
