@@ -1,5 +1,7 @@
 # Finding IOCs in a malicious Excel VBA macro
 
+["@elioxyz"](https://twitter.com/elioxyz)
+
 ## Analysis
 
 This is the analysis and deobfuscation of a malicious Excel VBA Macro from a sample found on [Malware Bazaar](https://bazaar.abuse.ch/browse/)

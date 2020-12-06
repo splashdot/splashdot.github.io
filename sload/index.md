@@ -1,5 +1,7 @@
 # Static code analysis of sLoad ($ver="2.9.3")
 
+["@elioxyz"](https://twitter.com/elioxyz)
+
 ## Introduction
 
 Following is an in-depth analysis of the initial obfuscated Powershell script used by sLoad to drop its content.

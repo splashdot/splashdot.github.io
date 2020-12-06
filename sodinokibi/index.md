@@ -1,5 +1,7 @@
 # Extraction of the Sodinokibi configuration file
 
+["@elioxyz"](https://twitter.com/elioxyz)
+
 ## Introduction
 
 I recently had the opportunity to work on a Sodinokibi sample but I have not been able to find a beginner-friendly guide to extract its configuration file, so I thought I would try and write one. Sodinokibi is a powerful and efficient ransomware sold and maintained by REvil, and is part of the growing trend of Ransomware-as-a-Service (RaaS). This post will be focused on its unpacking, configuration and some detection artifacts.

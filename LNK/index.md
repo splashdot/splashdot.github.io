@@ -1,5 +1,7 @@
 # Shell Link files 0-interaction exploitability
 
+["@elioxyz"](https://twitter.com/elioxyz)
+
 ## Intro
 
 There has been some talk about Windows Shell Link files (LNK files, or shortcuts) remote command execution thanks to the recent, albeit patched, CVE-2020-0729, but the file format's vulnerabilities date back many years (see CVE-2017-8464 and CVE-2015-0096 for recent examples, ore even CVE-2010-2568 which was used in Stuxnet). Although command execution vulnerabilities are being patched (or dismissed as ["social engineering"](https://devblogs.microsoft.com/oldnewthing/20190403-00/?p=102381)), the file's structure is still prone to exploitability.

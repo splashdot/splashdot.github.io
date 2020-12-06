@@ -1,5 +1,7 @@
 # New Emotet spam campaign (July, 2020) - Analysis of the VBA macro
 
+["@elioxyz"](https://twitter.com/elioxyz)
+
 ## Intro
 
 Thanks to the work of a few invested people like [@Cryptolaemus](https://twitter.com/Cryptolaemus1) we were able to detect a new wave of Emotet spam, starting on 17th, July 2020.

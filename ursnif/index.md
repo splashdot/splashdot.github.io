@@ -1,5 +1,7 @@
 # Ursnif Word macro deobfuscation
 
+["@elioxyz"](https://twitter.com/elioxyz)
+
 ## Intro
 
 Given the recent, new campaign aimed at distributing the Ursnif trojan, I thought I would take a look at malicious documents observed dropping said malware. I took one .doc with tag Gozi off of MalwareBazaar and started dissecting it: what I found is an amount of obfuscation and general chaotic code that is almost unprecedented, so here is an exaplanation of the most intriguing aspects of the code, which has it all: useless variables, unused functions, bitwise operations, many programming languages, a LOLBAS (kind of), encoding, and so on.
