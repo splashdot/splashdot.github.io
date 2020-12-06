@@ -2,14 +2,14 @@
 
 ## The what
 
-Hello all,
+Hello all,<br />
 this is a very simple space I am going to use to upload the results of my experiments in the realm of infosec, so that they can be easily shared.
 
 I use the word _experiment_ intentionally: of all the things that intrigue me the most about this sector, the opportunity to just `try` and see the results is particularly fascinating, be it malware analysis, coding or offsec.
 
-Of course reinventing the wheel has been proved to be illogical, so I write something the moment I am not able to find the exact thing I am looking for online: if I must study it/do it myself, I might as well put it online for everybody to take advantange of the same way I take advantage of others' work, right? In a way, this ia also what motivates me. 
+Of course reinventing the wheel has been proved to be illogical, so I write something the moment I am not able to find the exact thing I am looking for online: if I must study it/do it myself, I might as well put it online for everybody to take advantange of the same way I take advantage of others' work, right? In a way, this is also what motivates me. 
 
-I am mainly interested in malware and threat hunting, but also enjoy an occasional CTF.
+I am mainly interested in malware and threat hunting, but also enjoy an occasional CTF.<br />
 This is my Twitter: ["@elioxyz"](https://twitter.com/elioxyz)
 
 ## My work
