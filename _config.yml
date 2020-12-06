@@ -13,5 +13,6 @@ include:
   - ISSUE_TEMPLATE.md
   - PULL_REQUEST_TEMPLATE.md
   - new_html.md
+  - index.md
 
 theme: jekyll-theme-hacker
