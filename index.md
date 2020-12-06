@@ -28,7 +28,7 @@ This is a list of articles and writeup I have uploaded so far:
 # HOWTO:
 
 def try_harder(amount)
-	if amount < enough:
+	if amount <= enough:
 		try_harder(amount+1)
 	else:
 		try_harder(amount+2)
