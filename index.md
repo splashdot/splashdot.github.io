@@ -22,3 +22,15 @@ This is a list of articles and writeup I have uploaded so far:
 - Extraction of the Sodinokibi configuration file: ["sodinokibi"](https://splashdot.github.io/sodinokibi/), _26/08/2020_<br />
 - Shell Link files 0-interaction exploitability: ["LNK"](https://splashdot.github.io/LNK/), _13/11/2020_<br />
 - Ursnif Word macro deobfuscation: ["ursnif"](https://splashdot.github.io/ursnif/), _06/12/2020_<br />
+
+
+```python
+# HOWTO:
+
+def try_harder(amount)
+	if amount < enough:
+		try_harder(amount+1)
+	else:
+		try_harder(amount+2)
+
+```
