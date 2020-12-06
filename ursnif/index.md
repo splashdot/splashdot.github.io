@@ -8,17 +8,17 @@ Given the recent, new campaign aimed at distributing the Ursnif trojan, I though
 
 Uploaded to Malwaare Bazzar by ["@JAMES_MHT"](https://twitter.com/JAMESWT_MHT/) on the 3rd of December:
 
-_File Name:_ scongiurare.12.01.2020.doc\n
-_MD5:_ 9edc856edd53b45e9c6f84c2e65e1cc7\n
-_SHA256:_ 4d1c37dac45daec5880750b8499b337e6ccf3696bfd645c4e22f388001e79900\n
-_MIME type:_ application/vnd.openxmlformats-officedocument.wordprocessingml.document\n
-_VirusTotal score:_ 32/64 (at the time of writing)\n
-_Document Author:_ egmu\n
-_Creation time:_ 02/12/2020 04:05\n
+_File Name:_ scongiurare.12.01.2020.doc<br />
+_MD5:_ 9edc856edd53b45e9c6f84c2e65e1cc7<br />
+_SHA256:_ 4d1c37dac45daec5880750b8499b337e6ccf3696bfd645c4e22f388001e79900<br />
+_MIME type:_ application/vnd.openxmlformats-officedocument.wordprocessingml.document<br />
+_VirusTotal score:_ 32/64 (at the time of writing)<br />
+_Document Author:_ egmu<br />
+_Creation time:_ 02/12/2020 04:05<br />
 
 ## Overview
 
-The macro creates an HTML document which contains JS code that will be ran with `mshta.exe`: it will dowload the ursnif payload and execute it; the file retrieved from the Internet is a DLL that will be executed with `regsrv 32` as a file named `temp.tmp` saved in the %temp% folder.
+The macro creates an HTML document which contains JS code that will be ran with `mshta.exe`: it will dowload the ursnif payload and execute it; the file retrieved from the Internet is a DLL that will be executed with `regsrv 32` as a file named `temp.tmp` saved in the %temp% folder.<br />
 Notably, the source code of the HTML is not inside the macre but inside the property "Comments" of the document: at the end, I will show a way of extracting the domain hosting the ursnif payload without executing the Macro and without any tool other than a browser.
 
 ## Macro
@@ -67,7 +67,7 @@ But let's figure out how, with the functions `ap7how` and `a3guMK` that are call
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif/images/a94yD.PNG)
 
-We immediately see three global variables declared at the beginning of the stream: the first one is the obfuscated argument of the `CreateObject()` we saw before, the second is a string that contains the character to delete when the "remove parenthesis" function is called (`aiPnSR()`) and the third one is just a number that will be used in the last stream.
+We immediately see three global variables declared at the beginning of the stream: the first one is the obfuscated argument of the `CreateObject()` we saw before, the second is a string that contains the character to delete when the "remove parenthesis" function is called (`aiPnSR()`) and the third one is just a number that will be used in the last stream.<br />
 Then, `ap7how` and `a3guMK` are sent to two different subs (note: `If 17728 / 277 < 217 Then` is just a different way to create a `True` statement).
 
 `ap7how` -> `aimbhA` (stream `VBA/aMuVl`)
@@ -77,7 +77,7 @@ Then, `ap7how` and `a3guMK` are sent to two different subs (note: `If 17728 / 27
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif/images/aMuVl.PNG)
 
-This stream contains some operations that are going to be used later, mainly in the second half of the code; the two other interesting functions are `aimbhA()` and `aMHvsL()`.
+This stream contains some operations that are going to be used later, mainly in the second half of the code; the two other interesting functions are `aimbhA()` and `aMHvsL()`.<br />
 `aimbhA()` outputs the variable used with `CreateObject()`, so basically `c:\windows\system32\mshta.exe c:\users\public\ms.html` (we will see how in the stream `a4eq3S`), while `aMHvsL()` is going to copy the contents of filename `c:\users\public\ms.com` into filename `c:\users\public\ms.html` (`ac9wVj` is a reference to `FileCopy`).
 
 ### VBA/a0Ep5s
