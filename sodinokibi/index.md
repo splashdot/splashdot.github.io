@@ -1,6 +1,8 @@
 # Extraction of the Sodinokibi configuration file
 
-["@elioxyz"](https://twitter.com/elioxyz)
+[@elioxyz](https://twitter.com/elioxyz)
+
+[Home](https://splashdot.github.io)
 
 ## Introduction
 

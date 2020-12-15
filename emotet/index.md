@@ -1,6 +1,8 @@
 # New Emotet spam campaign (July, 2020) - Analysis of the VBA macro
 
-["@elioxyz"](https://twitter.com/elioxyz)
+[@elioxyz](https://twitter.com/elioxyz)
+
+[Home](https://splashdot.github.io)
 
 ## Intro
 

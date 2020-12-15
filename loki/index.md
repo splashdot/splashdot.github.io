@@ -1,6 +1,8 @@
 # Finding IOCs in a malicious Excel VBA macro
 
-["@elioxyz"](https://twitter.com/elioxyz)
+[@elioxyz](https://twitter.com/elioxyz)
+
+[Home](https://splashdot.github.io)
 
 ## Analysis
 

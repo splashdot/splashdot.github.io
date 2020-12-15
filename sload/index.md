@@ -1,6 +1,8 @@
 # Static code analysis of sLoad ($ver="2.9.3")
 
-["@elioxyz"](https://twitter.com/elioxyz)
+[@elioxyz](https://twitter.com/elioxyz)
+
+[Home](https://splashdot.github.io)
 
 ## Introduction
 
