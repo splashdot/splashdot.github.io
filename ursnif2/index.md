@@ -56,13 +56,13 @@ So, to sum up the process up to this point I will refer to the following system 
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif2/images/initial.PNG)
 
-Please, note tha last process (`explorer.exe`) that spawns an instance of mshta.exe: ursnif has injected into it and begins what I call the second stage.
+Please, note the last process (`explorer.exe`) that spawns an instance of mshta.exe: ursnif has injected into it and begins what I call the second stage.
 
 ## Second stage of the infection: final steps
 
 At this point we are able to delve into the fileless aspects of Gozi/Ursnif. The malware stores its files into a semi-randomly named key in the registry located in `HKCU\Software\AppDataLow\Software\Microsoft`. Here is their creation (only the first stage):
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif2/images/regi_creation.PNG)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif2/images/regi_creation.png)
 
 And here are their contents:
 
@@ -86,7 +86,7 @@ Nr1fha=new ActiveXObject('WScript.Shell');Nr1fha.Run('powershell iex ([System.Te
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif2/images/apispsvc.PNG)
 
-Now, this last powershell script is very interesting, since it will perform process injection with bytes: it is lightly obfuscated and contains:
+Now, this last powershell script is very interesting, since it will perform process injection with bytes; it is lightly obfuscated and contains:
 
 - a function that decodes base64 (`ktavhvyqrgv`) 
 - two base64 encoded strings that are being executed with `iex`
@@ -100,13 +100,13 @@ The above code creates two objects (`$klam` and `$tnc`) that allow access to nat
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif2/images/secondb64.PNG)
 
-This code is responsible for injecting the contents of the bytes array `$btweqyqexdi` into the process running, leveraging QueueUserAPC. Windows APIs are called by referencing the objects created before: as en example, `VirtualAllocEx` will be invoked simply by calling `$klaam::VirtualAllocEx`.
+This code is responsible for injecting the contents of the bytes array `$btweqyqexdi` into the process running, leveraging `QueueUserAPC`. Windows APIs are called by referencing the objects created before: as en example, `VirtualAllocEx` will be invoked simply by calling `$klaam::VirtualAllocEx`.
 
 Now that `loader.dll` is into memory, it will decode the .bss section where it stores all the strings: this ultimates the infection process as the next step is the final DLL (either Client32 or client64 depending on the system architecture).
 
 ## Persistence
 
-Persistence is achieved through a value in HKCU\Software\Microsoft\Windows\CurrentVersion\Run:
+Persistence is achieved through a value in `HKCU\Software\Microsoft\Windows\CurrentVersion\Run`:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/ursnif2/images/persistence.PNG)
 
@@ -126,15 +126,15 @@ Here are the two files in the folder:
 
 The detection of this malware could be done with IOCs (such as domains or IPs), but the registry keys prove to be a better way to detect it with precision. Detection could be achieved by analysing the keys in \Run (which are used by many other malware variants), which would eventually point to the key in `HKCU\Software\AppDataLow\Software\Microsoft`, where all the malware resides.
 
-Detection can also be achieved by continuous monitoring: a good indicator are the correlations between network connections and processes (sysmon event 3), given that the exfiltration would start from `explorer.exe` where the malware injects itself into. Ursnif also uses a tor module (please refer to the picture of the registry keys and look for `TorClient`), so Tor traffic could also be use to detect potential malicious activity.
+Detection can also be achieved by continuous monitoring: a good indicator are the correlations between network connections and processes (sysmon event 3), given that the exfiltration would start from `explorer.exe` where the malware injects itself into. Ursnif also uses a tor module (please refer to the picture of the registry keys and look for `TorClient`), so Tor traffic could also be used to detect potential malicious activity.
 
 ## IOCs
 
-*DLL*
+*DLL*<br />
 SHA256: af07f9aa2ac4a583413860f67106192848a6cbf183c2e10ab2066ef300e1667e<br />
 MD5: b37dfc2b132c7991b866d8dc92e80bcb<br />
 
-*C2*
+*C2*<br />
 api3[.]lepini[.]at<br />
 c56[.]lepini[.]at<br />
 api10[.]laptok[.]at<br />
