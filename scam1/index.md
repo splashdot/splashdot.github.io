@@ -14,7 +14,7 @@ An unkown actor is uploading several images containing login information to bitc
 
 Lightshot comes as an executable that installs itself as a service and waits for the user to press the PrintScreen button. Once taken, the screenshot can be uploaded to `prnt.sc` with a unique URL.
 
-![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/lightshot_1.PNG)
+![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/lightshot_1.png)
 
 The URL can be easily changed to view other screenshots, and while doing so one can quickly notice a pattern consisting of several images of login information to websites related to bitcoins. The images range from fake gmail screenshots of a password reset notification with cleartext credentials, to notepad++ screenshots, up to even handwritten notes. Some examples are reported below.
 
@@ -32,7 +32,7 @@ A total of five different fake websites has been discovered:
 `crypto-wallet-btc[.]com`<br />
 `btc-ex[.]org`<br />
 
-Their WHOIS information show no common signs, other than the fact that they are all relatively new domains, registered a few weeks to some months ago. Searching for similar websites on urlscan yields some results, suggesting that there may be many others. For instance, the websites `sell-buy-btc[.]online` and `bit-trading[.]online`, small variations of the domains above, are hosting the same fake websites.
+Their WHOIS information show no common signs, other than the fact that they are all relatively new domains, registered a few weeks to some months ago. Searching for similar websites on urlscan yields some results, suggesting that there may be many others. For instance, the websites `sell-buy-btc[.]online` and `bit-trading[.]online`, small variations of the domains above, are hosting the same fake sites.
 
 The actor employs two different websites templates: one is used by `crypto-wallet-btc`, `sell-buy-btc`, `sellbuy-btc` and `bit-trading`, while the other one is used by `crypto-trade24`, `btc-ex` and `bit-trade`. Searching on urlscan for the favicons' hashes show that the first template is partially copied by `cex.io`, a legitimate bitcoin exchange. However, the websites are thought to use other bitcoin exchanges' parts: in fact, they appear as if they are up-to-date, full-fledged and complete modern websites with dashboards, legal information and "About us" pages. Although at first glance they appear to be legitimate, a closer look reveals that their functionality is somewhat broken, e.g. there is no possibility to signup, some links are not leading anywhere, and contact information are made up. It looks like the only thing that can be done is logging in with the fake account: even then, the only available working operation seems to be withdrawing cryptocurrencies.
 
