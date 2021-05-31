@@ -31,6 +31,9 @@ This is a list of articles and writeup I have uploaded so far:
 - Ursnif Word macro deobfuscation: [ursnif](https://splashdot.github.io/ursnif/), _06/12/2020_<br />
 
 - Ursnif: behavioural analysis of the infection process: [ursnif2](https://splashdot.github.io/ursnif2/), _15/12/2020_
+
+- Scammers scamming scammers, or a different approach to Bitcoin extortion: [scam](https://splashdot.github.io/scam1/), _31/05/2021_
+
 <br />
 <br />
 
