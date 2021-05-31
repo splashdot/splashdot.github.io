@@ -19,6 +19,7 @@ Lightshot comes as an executable that installs itself as a service and waits for
 The URL can be easily changed to view other screenshots, and while doing so one can quickly notice a pattern consisting of several images of login information to websites related to bitcoins. The images range from fake gmail screenshots of a password reset notification with cleartext credentials, to notepad++ screenshots, up to even handwritten notes. Some examples are reported below.
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/fake_1.PNG)<br />
+
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/fake_2.PNG)<br />
 
 ## The Actor's infrastructure
@@ -35,7 +36,11 @@ Their WHOIS information show no common signs, other than the fact that they are 
 
 The actor employs two different websites templates: one is used by `crypto-wallet-btc`, `sell-buy-btc`, `sellbuy-btc` and `bit-trading`, while the other one is used by `crypto-trade24`, `btc-ex` and `bit-trade`. Searching on urlscan for the favicons' hashes show that the first template is partially copied by `cex.io`, a legitimate bitcoin exchange. However, the websites are thought to use other bitcoin exchanges' parts: in fact, they appear as if they are up-to-date, full-fledged and complete modern websites with dashboards, legal information and "About us" pages. Although at first glance they appear to be legitimate, a closer look reveals that their functionality is somewhat broken, e.g. there is no possibility to signup, some links are not leading anywhere, and contact information are made up. It looks like the only thing that can be done is logging in with the fake account: even then, the only available working operation seems to be withdrawing cryptocurrencies.
 
+Example of a profile page:
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/login_1.PNG)<br />
+
+
+Example of a profile page on a different fake website:
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/login_2.PNG)<br />
 
 When trying to withdraw money, the websites prompts the user to confirm the request by sending a small fee to an address controlled by the actors.
@@ -55,6 +60,7 @@ As can be seen, everything is hardcoded and simply aims at having the user pay t
 The websites discussed above use three different favicons. Their MurmurHash values have been calculated and searched for on Shodan: in this way new, different IPs using the same favicon were discovered. Two of the three favicons have the following matches:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/favicon_1.PNG)<br />
+
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/favicon_2.PNG)<br />
 
 Two of the four IPs show some connections with the fake websites. For instance, this is the page that appears when navigating to `144.91.125[.]234`:
