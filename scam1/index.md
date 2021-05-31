@@ -37,10 +37,12 @@ Their WHOIS information show no common signs, other than the fact that they are 
 The actor employs two different websites templates: one is used by `crypto-wallet-btc`, `sell-buy-btc`, `sellbuy-btc` and `bit-trading`, while the other one is used by `crypto-trade24`, `btc-ex` and `bit-trade`. Searching on urlscan for the favicons' hashes show that the first template is partially copied by `cex.io`, a legitimate bitcoin exchange. However, the websites are thought to use other bitcoin exchanges' parts: in fact, they appear as if they are up-to-date, full-fledged and complete modern websites with dashboards, legal information and "About us" pages. Although at first glance they appear to be legitimate, a closer look reveals that their functionality is somewhat broken, e.g. there is no possibility to signup, some links are not leading anywhere, and contact information are made up. It looks like the only thing that can be done is logging in with the fake account: even then, the only available working operation seems to be withdrawing cryptocurrencies.
 
 Example of a profile page:
+
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/login_1.PNG)<br />
 
 
 Example of a profile page on a different fake website:
+
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/scam1/images/login_2.PNG)<br />
 
 When trying to withdraw money, the websites prompts the user to confirm the request by sending a small fee to an address controlled by the actors.
