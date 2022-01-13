@@ -9,7 +9,7 @@
 
 The NFT world became extremely notorious during the course of 2021, and for many different reasons. One of them is money: the amount of it that is moved every day by NFT vendors, brokers and producers made it possible for a whole new market to stem. The demand for NFT has skyrocketed and VFX artists have moved towards it, creating NFTs for companies and for their own.
 
-The nature of NFTs and, more generally, the cryptocurrency world unfortunately attract lots of criminals that are willing to go long ways to scam people and steal their cryptocurrencies. In this instance, a popular NFT artist was approached by an individual claiming to be associated with a game developing firm (Wargaming), who offered to work on a project about NFTs. This individual eventually shared a folder allegedly containing sketches and information about the company. At this point, once realised that the files in the folder were odd, this person reached out to me asking to take a look, which I much happily did. The result of the files' analysis is presented below.
+The nature of NFTs and, more generally, the cryptocurrency world unfortunately attract lots of criminals that are willing to go long ways to scam people and steal their cryptocurrencies. In this instance, a popular NFT artist was approached by an individual claiming to be associated with a game developing firm (Wargaming), who offered to work on a project about NFTs. This individual eventually shared a folder allegedly containing sketches and information about the company. At this point, once he realised that the files in the folder were odd, this person reached out to me asking to take a look. The contents they shared was made to appear legitimate, and to lure someone who is familiar with NFT to click on them. However, the files were infected and contained malicious code, which downloaded and executed further payloads on the victim machine. The final purpose of this malware is to exfiltrate various kinds of data. The result of the files' analysis is presented below.
 
 Some key aspects are available here:
 
@@ -17,7 +17,7 @@ Some key aspects are available here:
 * the TA is using commodity malware and is therefore not sophisticated
 * the TA is using some anti-analysis techniques such as code obfuscation, shortcut modification and filesize inflation
 * the TA is using Discord's CDN to store their payloads
-* The TA is only interested in data related to browsers (cookies, passwords,...) and cryptocurrency (wallets, credentials,...)
+* The TA is mainly interested in data related to browsers (cookies, passwords,...) and cryptocurrency (wallets, credentials,...)
 
 ## Initial archive
 
