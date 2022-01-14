@@ -34,6 +34,8 @@ This is a list of articles and writeup I have uploaded so far:
 
 - Scammers scamming scammers, or a different approach to Bitcoin extortion: [scam](https://splashdot.github.io/scam1/), _31/05/2021_
 
+- Ad-hoc malware for NFT artists: [NFT](https://splashdot.github.io/scam1/), _14/01/2022_
+
 <br />
 <br />
 
