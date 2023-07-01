@@ -31,6 +31,7 @@ A total of five different fake websites has been discovered:
 `bit-trade[.]pro`<br />
 `crypto-wallet-btc[.]com`<br />
 `btc-ex[.]org`<br />
+`trade-btc[.]online`<br />
 
 Their WHOIS information show no common signs, other than the fact that they are all relatively new domains, registered a few weeks to some months ago. Searching for similar websites on urlscan yields some results, suggesting that there may be many others. For instance, the websites `sell-buy-btc[.]online` and `bit-trading[.]online`, small variations of the domains above, are hosting the same fake sites.
 
@@ -82,6 +83,8 @@ The wallets' addresses contained in the websites are the following:
 | Bitcoin    | 37BEduTbBh9z68gDdDRAnkx2JTb2rcA1nr|
 | Ethereum   | 0x9fde7bd79830b7c6df049c9b6fcf6f04f7c9e62b|
 | Ethereum   | 0x90D51665164baf6eCF29cDAcDC9390FB7660bb0c|
+| Ethereum   | 0x4779ADD23c9E38b7bCe72e241771C40a808bF16E|
+
 
 As of the time of writing, they have up to dozens of transactions for a total of around 0.2384 BTC and 1 ETH. Therefore, it can be concluded that many victims have fallen for this scam.
 
@@ -102,6 +105,7 @@ Domains:
 `btc-ex[.]org`<br />
 `sell-buy-btc[.]online`<br />
 `bit-trading[.]online`<br />
+`trade-btc[.]online`<br />
 
 IPs hosting the websites:
 
@@ -130,3 +134,4 @@ Actor's wallets:
 `37BEduTbBh9z68gDdDRAnkx2JTb2rcA1nr`<br />
 `0x9fde7bd79830b7c6df049c9b6fcf6f04f7c9e62b`<br />
 `0x90D51665164baf6eCF29cDAcDC9390FB7660bb0c`<br />
+`0x4779ADD23c9E38b7bCe72e241771C40a808bF16E`<br />
